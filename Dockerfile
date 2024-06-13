@@ -10,10 +10,6 @@ RUN apt-get update && \
 # Generate SSH key pair for Jenkins user
 RUN su - jenkins -c 'ssh-keygen -t rsa -b 4096 -C "jenkins@example.com" -f /var/jenkins_home/.ssh/remote_key -q -N ""'
 
-# Copy SSH public key to host's current directory (assuming the host is running CentOS 7)
-RUN cp /var/jenkins_home/.ssh/remote_key ./centos7/remote_key
-RUN cp /var/jenkins_home/.ssh/remote_key.pub ./centos7/remote_key.pub
-
 # Ensure correct permissions for SSH key files
 RUN chown jenkins:jenkins /var/jenkins_home/.ssh/remote_key*
 
