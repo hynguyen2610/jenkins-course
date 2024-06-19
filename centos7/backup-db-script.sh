@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Get current time
-DATE=$(date +%H-%M-%S)
+DATE=$(date +%Y-%m-%d-%H-%M-%S)
 
 # Assign command-line arguments to variables
 DB_HOST=$1
