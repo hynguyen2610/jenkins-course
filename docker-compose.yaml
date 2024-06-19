@@ -2,8 +2,10 @@ version: '3'
 
 services:
   jenkins:
-    image: bluestorm1288/jenkins
+    image: bluestorm1288/jenkins-ansible
     container_name: jenkins
+    build:
+      context: jenkins-ansible
     ports:
       - "8080:8080"
     volumes:
