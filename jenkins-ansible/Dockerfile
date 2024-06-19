@@ -14,6 +14,12 @@ RUN apt-get update && \
 apt-get install -y iputils-ping && \
 rm -rf /var/lib/apt/lists/*
 
+# Set environment variables
+ENV JENKINS_HOME=/var/jenkins_home
+
+# Ensure the home directory is set for the Jenkins user
+RUN usermod -d $JENKINS_HOME jenkins
+
 # Install Python and pip
 RUN apt-get update && \
     apt-get install -y python3 python3-pip python3-venv && \
