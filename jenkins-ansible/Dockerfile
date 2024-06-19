@@ -4,6 +4,16 @@ FROM jenkins/jenkins
 # Switch to root user to install additional software
 USER root
 
+# Install necessary packages for SSH key generation
+RUN apt-get update && \
+    apt-get install -y openssh-client && \
+    rm -rf /var/lib/apt/lists/*
+
+# Install ping command
+RUN apt-get update && \
+apt-get install -y iputils-ping && \
+rm -rf /var/lib/apt/lists/*
+
 # Install Python and pip
 RUN apt-get update && \
     apt-get install -y python3 python3-pip python3-venv && \
