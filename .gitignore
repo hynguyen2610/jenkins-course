@@ -1,2 +1,7 @@
 jenkins_home
 db_data
+jenkins-ansible
+# Except the ansible directory and its contents
+!jenkins_home/ansible/
+!jenkins_home/ansible/**
+jenkins-ansible/.cache
