@@ -1,5 +1,5 @@
 # Use the official Jenkins base image
-FROM jenkins/jenkins
+FROM fortinux/jenkins-ansible
 
 # Switch to root user to install additional software
 USER root
@@ -14,33 +14,13 @@ RUN apt-get update && \
 apt-get install -y iputils-ping && \
 rm -rf /var/lib/apt/lists/*
 
-# Set environment variables
-ENV JENKINS_HOME=/var/jenkins_home
-
-# Ensure the home directory is set for the Jenkins user
-RUN usermod -d $JENKINS_HOME jenkins
-
-# Install Python and pip
-RUN apt-get update && \
-    apt-get install -y python3 python3-pip python3-venv && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
-
-# Create a directory for the virtual environment
-RUN mkdir -p /opt/ansible-env
-
-# Create a virtual environment
-RUN python3 -m venv /opt/ansible-env
-
-# Activate the virtual environment and install Ansible
-RUN /opt/ansible-env/bin/pip install --upgrade pip && \
-    /opt/ansible-env/bin/pip install ansible
-
-# Ensure the virtual environment's binaries are in the PATH
-ENV PATH="/opt/ansible-env/bin:$PATH"
-
-# Switch back to the jenkins user
 USER jenkins
 
-# Print Ansible version to verify the installation
-RUN ansible --version
+# Generate SSH key pair for Jenkins user
+# Uncomment these lines only when ssh key re-generating is needed.
+# At the time it is presented at jenkins_home/.ssh and should be reused.
+# RUN ssh-keygen -t rsa -b 4096 -C "jenkins@example.com" -f /var/jenkins_home/.ssh/remote_key -q -N ""
+# RUN chown jenkins:jenkins /var/jenkins_home/.ssh/remote_key*
+
+# Ensure correct ownership of Jenkins home directory
+RUN chown -R 1000:1000 /var/jenkins_home
