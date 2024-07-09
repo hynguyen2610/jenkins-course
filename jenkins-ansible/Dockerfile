@@ -6,13 +6,14 @@ USER root
 
 # Install necessary packages for SSH key generation
 RUN apt-get update && \
-    apt-get install -y openssh-client && \
-    rm -rf /var/lib/apt/lists/*
+    apt-get install -y openssh-client
 
 # Install ping command
-RUN apt-get update && \
-apt-get install -y iputils-ping && \
+
+RUN apt-get install -y iputils-ping && \
 rm -rf /var/lib/apt/lists/*
+
+RUN chown -R 1000:1000 /var/jenkins_home
 
 USER jenkins
 
@@ -23,4 +24,3 @@ USER jenkins
 # RUN chown jenkins:jenkins /var/jenkins_home/.ssh/remote_key*
 
 # Ensure correct ownership of Jenkins home directory
-RUN chown -R 1000:1000 /var/jenkins_home
