@@ -16,9 +16,11 @@ services:
     image: remote_host
     container_name: remote_host
     build:
-      context: centos7
+      context: remote_host
+    # To keep the oracle-linux container running  
+    command: tail -f /dev/null  
     volumes:
-      - "$PWD/centos7/backup-db-script.sh:/tmp/backup-db-script.sh"
+      - "$PWD/remote_host/backup-db-script.sh:/tmp/backup-db-script.sh"
     networks:
       - net
   db_host:

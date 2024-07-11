@@ -5,7 +5,7 @@ Generate the SSH key pair in Jenkins (Container A):
 ```sh
 docker exec -it jenkins bash -c "ssh-keygen -t rsa -b 4096 -C 'your_email@example.com' -f /var/jenkins_home/.ssh/remote-key -N ''"
 ```
-## 2. Copy the pub key to centos7 folder
+## 2. Copy the pub key to remote_host folder
 Just do it
 ## 3. Start the containers
 Run 
