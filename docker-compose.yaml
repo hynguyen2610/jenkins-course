@@ -17,8 +17,6 @@ services:
     container_name: remote_host
     build:
       context: remote_host
-    # To keep the oracle-linux container running  
-    command: tail -f /dev/null  
     volumes:
       - "$PWD/remote_host/backup-db-script.sh:/tmp/backup-db-script.sh"
     networks:
@@ -31,6 +29,15 @@ services:
     volumes:
       - "$PWD/db_data:/var/lib/mysql"
     networks:
-      - net  
+      - net
+  ansible_web:
+    image: ansible_web
+    container_name: ansible_web
+    build:
+      context: ansible_web
+    ports:
+      - "8088:80"  
+    networks:
+      - net      
 networks:
   net:
