@@ -12,13 +12,15 @@ EXPOSE 80 443
 
 VOLUME /var/wwww/html /var/log/nginx /var/log/php-fpm /var/lib/php-fpm
 
-RUN setfacl -R -m u:remote_user:rwx /var/www/html
+RUN setfacl -R -m u:remote_user:rwx /usr/share/nginx/html
 
-COPY ./conf/nginx.conf /etc/nginx/nginx.conf
+# COPY ./conf/nginx.conf /etc/nginx/nginx.conf
+# COPY ./conf/jenkins.conf /etc/nginx/default.d/jenkins.conf
 
 COPY ./bin/start.sh /start.sh
 
-COPY ./index.php /var/www/html/
+COPY ./index.php /usr/share/nginx/html/
+COPY ./index.html /usr/share/nginx/html
 
 RUN mkdir -p /usr/local/var/log/nginx/
 
@@ -26,6 +28,6 @@ RUN mkdir -p /run/php-fpm/
 
 COPY ./bin/start.sh /start.sh
 
-RUN chmod +x /start.sh
+RUN chmod +x start.sh
 
-CMD ./start.sh
+CMD ["/start.sh"]
