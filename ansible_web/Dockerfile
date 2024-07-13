@@ -20,6 +20,7 @@ RUN setfacl -R -m u:remote_user:rwx /usr/share/nginx/html
 COPY ./bin/start.sh /start.sh
 
 COPY ./index.php /usr/share/nginx/html/
+COPY ./index.php /var/www/html/
 COPY ./index.html /usr/share/nginx/html
 
 RUN mkdir -p /usr/local/var/log/nginx/

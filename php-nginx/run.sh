@@ -1,0 +1,1 @@
+docker run -p 8089:8080 -v ./html:/var/www/html trafex/php-nginx
