@@ -4,3 +4,4 @@ db_data
 !jenkins_home/ansible/
 !jenkins_home/ansible/**
 jenkins-ansible/.cache
+/ansible_web/conf1
