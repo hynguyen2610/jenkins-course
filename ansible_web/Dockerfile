@@ -22,5 +22,4 @@ COPY ./bin/start.sh /start.sh
 
 RUN chmod +x start.sh
 
-CMD ["/bin/bash", "-c", "/usr/sbin/sshd && php-fpm -F -R -c /etc/php/fpm && nginx -g 'daemon off;'"]
-
+CMD ["/start.sh"]
