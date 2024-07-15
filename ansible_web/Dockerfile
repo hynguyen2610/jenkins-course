@@ -3,7 +3,6 @@ FROM remote_host
 RUN dnf install -y nginx && \
     dnf clean all
 
-# RUN yum -y install php71u-fpm php71u-cli php71u-mysqlnd php71u-soap php71u-xml php71u-zip php71u-json php71u-mcrypt php71u-mbstring php71u-gd  --enablerepo=ius && yum clean all
 RUN yum -y install php-fpm php-cli php-mysqlnd php-soap php-xml php-zip php-json php-mbstring php-gd
 # Currently php-mcrypt is deprecated and remove in php 7.2, if there is issue in future
 # dnf install php-pecl-mcrypt_compat
