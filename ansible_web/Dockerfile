@@ -1,8 +1,7 @@
 FROM remote_host
 
 RUN dnf install -y nginx && \
-    dnf clean all && \
-    systemctl enable nginx
+    dnf clean all
 
 # RUN yum -y install php71u-fpm php71u-cli php71u-mysqlnd php71u-soap php71u-xml php71u-zip php71u-json php71u-mcrypt php71u-mbstring php71u-gd  --enablerepo=ius && yum clean all
 RUN yum -y install php-fpm php-cli php-mysqlnd php-soap php-xml php-zip php-json php-mbstring php-gd
@@ -10,14 +9,11 @@ RUN yum -y install php-fpm php-cli php-mysqlnd php-soap php-xml php-zip php-json
 # dnf install php-pecl-mcrypt_compat
 EXPOSE 80 443
 
-VOLUME /var/wwww/html /var/log/nginx /var/log/php-fpm /var/lib/php-fpm
-
 RUN setfacl -R -m u:remote_user:rwx /usr/share/nginx/html
 
 COPY ./bin/start.sh /start.sh
 
-COPY ./table.php /usr/share/nginx/html/index.php
-
+COPY ./table.j2 /usr/share/nginx/html/index.php
 
 RUN mkdir -p /usr/local/var/log/nginx/
 
