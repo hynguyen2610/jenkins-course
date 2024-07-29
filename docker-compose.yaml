@@ -30,6 +30,8 @@ services:
       - "$PWD/db_data:/var/lib/mysql"
     networks:
       - net
+    ports:
+      - "3306:3306"  
   ansible_web:
     image: ansible_web
     container_name: ansible_web
