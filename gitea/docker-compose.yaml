@@ -1,0 +1,29 @@
+version: "3"
+
+networks:
+  jenkins-data_net:
+    external: true
+
+services:
+  server:
+    image: my-gitea
+    build:
+      context: ./my-gitea
+    container_name: gitea
+    environment:
+      - USER_UID=1000
+      - USER_GID=1000
+      - GITEA__database__DB_TYPE=mysql
+      - GITEA__database__HOST=db:3306
+      - GITEA__database__NAME=gitea
+      - GITEA__database__USER=root
+      - GITEA__database__PASSWD=1234
+    restart: always
+    networks:
+      - jenkins-data_net
+    volumes:
+      - ./gitea:/data
+      - ./localtime:/etc/localtime:ro
+    ports:
+      - "7000:3000"
+      - "2222:22"
