@@ -22,3 +22,6 @@ jenkins-ansible/.cache
 /jenkins-home/.cache
 /jenkins-home/workspace
 /jenkins-home/fingerprints
+/gitea/gitea
+.m2
+tools
