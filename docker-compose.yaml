@@ -41,6 +41,8 @@ services:
     ports:
       - "8088:80"  
     networks:
-      - net      
+      - net
+
 networks:
   net:
+    name: net
