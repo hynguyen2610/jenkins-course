@@ -42,16 +42,6 @@ services:
       - "8088:80"  
     networks:
       - net
-  artifactory:
-    image: releases-docker.jfrog.io/jfrog/artifactory-oss:7.77.5
-    container_name: artifactory
-    ports:
-      - "8081:8081"
-      - "8082:8082"
-    volumes:
-      - ${JFROG_HOME}/artifactory/var/:/var/opt/jfrog/artifactory
-    networks:
-      - net
 networks:
   net:
     name: net
