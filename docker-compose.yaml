@@ -11,6 +11,7 @@ services:
     volumes:
       - $PWD/jenkins-home:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
+    # privileged: true  # Enable privileged mode  
     networks:
       - net
   remote_host:
@@ -32,7 +33,20 @@ services:
     networks:
       - net
     ports:
-      - "3306:3306"  
+      - "3306:3306"
+
+  db9:
+    image: mysql:9.0.1
+    container_name: db9
+    environment:
+      - MYSQL_ROOT_PASSWORD=1234
+    # volumes:
+    #   - "$PWD/db_data:/var/lib/mysql"
+    networks:
+      - net
+    ports:
+      - "3307:3306"    
+
   ansible_web:
     image: ansible_web
     container_name: ansible_web
