@@ -26,8 +26,26 @@ RUN apt-get update && \
     apt-get update && \
     apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
+
+# Install Docker CLI
+RUN apt-get update && \
+    apt-get install -y docker.io
+
+# Install kubectl
+RUN curl -LO "https://dl.k8s.io/release/v1.22.0/bin/linux/amd64/kubectl" && \
+    chmod +x ./kubectl && \
+    mv ./kubectl /usr/local/bin/kubectl   
+
+# Add Jenkins user to Docker group
+RUN usermod -aG docker jenkins
+
+# Instead of doing this inside container, I need to allow username and groupname of user jenkins in host env instead
+# RUN chown root:docker /var/run/docker.sock
+
 # (Optional) Clean up to reduce image size
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+
+ENV PATH="/var/jenkins_home/tools/gg/google-cloud-sdk/bin/:${PATH}"
 
 
 USER jenkins
