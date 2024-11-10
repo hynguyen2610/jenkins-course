@@ -25,4 +25,6 @@ jenkins-ansible/.cache
 /gitea/gitea
 .m2
 tools
-jenkins-home/.config/jgit/config
+jenkins-home/.config
+jenkins-home/.kube
+jenkins-home/.docker
